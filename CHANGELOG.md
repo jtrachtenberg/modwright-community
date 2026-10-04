@@ -1,5 +1,38 @@
 # ModWright release notes
 
+## 0.1.3 (2026-10-04)
+
+"Which mod is doing this?" Two new tools, and log attribution, for an install
+with hundreds of mods. The README has a walkthrough.
+
+- **`owner_of`** says which mod a file comes from and which copy the game
+  sees, for a DLL named in a crash log, a path from `triage_logs`, or a bare
+  file name. It reads the game's mod folders, Vortex's deployment records
+  and Mod Organizer 2's profiles (Skyrim), and says how it decided. In
+  Baldur's Gate 3 it names the unpacked mod a loose file belongs to.
+- **`who_touches`** lists the mods that write the same record or entry:
+  Cyberpunk 2077 TweakDB records and flats, Baldur's Gate 3 stats entries
+  (read out of paks), Stardew Valley Content Patcher entries. With no key
+  it lists only real disagreements. Identical writes, list edits on
+  different items, mods the game does not load and second copies of one mod
+  are not counted; copies are reported separately.
+- **`triage_logs`** names which mod did what, where a framework's log
+  records it (TweakXL's read order, ArchiveXL's merges). `attributionFor`
+  narrows the answer to one asset, record or mod.
+- **`find_conflicts`** also reports files one Mod Organizer 2 mod overrides
+  in another.
+- **Fixes:**
+  - a build refuses two staged files whose names differ only in case,
+    instead of letting one silently overwrite the other;
+  - a mistyped `.json` project path is refused instead of loading a parent
+    folder's project;
+  - `bridge arm` refuses a partial test-plan link instead of dropping it.
+- **Knowledge:**
+  - new Cyberpunk 2077 facts on CET's RTTI binding, game systems and
+    entity queries, and on Red Hot Tools script reloads;
+  - new Baldur's Gate 3 facts on Osiris tag calls and goal-name prefixes;
+  - Codeware facts checked against its source.
+
 ## 0.1.2 (2026-10-04)
 
 Safety and reliability. Upgrade if you build mods with ModWright.
