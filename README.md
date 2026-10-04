@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/modwright.webp" width="384" alt="A wright in a woodcut-style print swings a hammer at a great wooden gear wheel on a harbour shore, above the word ModWright">
+</p>
+
 # ModWright community
 
 This is the public home of [ModWright](https://www.npmjs.com/package/modwright),
