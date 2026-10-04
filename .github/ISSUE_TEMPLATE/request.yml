@@ -1,0 +1,29 @@
+name: Game or feature request
+description: Support for another game, a mod system, a validator rule, a scaffold, or a tool feature.
+labels: [request]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of request
+      options:
+        - A new game
+        - A mod system or loader in a supported game
+        - A validator rule (a mistake ModWright should catch)
+        - A scaffold or authoring sequence
+        - A tool feature
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What you'd like
+      description: For a game or a mod system, name the loaders and tools modders use. For a rule, describe the mistake and what goes wrong in game.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Links to public documentation, wikis or tool repositories that describe the behaviour. ModWright's knowledge cites its sources, so links help most.

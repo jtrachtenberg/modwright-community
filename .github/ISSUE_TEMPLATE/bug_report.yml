@@ -1,0 +1,71 @@
+name: Bug report
+description: A tool returned something wrong, failed, or a game or mod setup isn't handled.
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: ModWright version
+      description: The output of `npx modwright --version`.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Cyberpunk 2077
+        - Baldur's Gate 3
+        - Skyrim Special Edition
+        - Elden Ring
+        - Valheim
+        - Subnautica 2
+        - Stardew Valley
+        - Nivalis Nights
+        - Not game-specific
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: Windows 11, Ubuntu 24.04, macOS 15
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: MCP client
+      placeholder: Claude Code, another MCP client, or the shell (`npx modwright tool call ...`)
+  - type: textarea
+    id: call
+    attributes:
+      label: The tool call
+      description: The tool and its arguments, as your assistant or the shell sent them.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What it returned
+      description: The result or error, trimmed to the relevant part.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: toolchain
+    attributes:
+      label: check_toolchain output
+      description: If a tool, an index or a data folder is involved, the output of `check_toolchain game=<id>`.
+      render: json
+  - type: markdown
+    attributes:
+      value: Paste only what you are comfortable making public. ModWright never needs your saves or your mod's private sources.

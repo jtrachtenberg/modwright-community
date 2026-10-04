@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/jtrachtenberg/modwright-community/discussions
+    about: Ask how to do something, or share an idea that isn't a bug.
+  - name: ModWright on npm
+    url: https://www.npmjs.com/package/modwright
+    about: The package and its full documentation.
