@@ -1,5 +1,40 @@
 # ModWright release notes
 
+## 0.1.2 (2026-10-04)
+
+Safety and reliability. Upgrade if you build mods with ModWright.
+
+- **A project runs its own commands only once you trust it.** A mod
+  project's `exec` build steps and `toolchain` tool paths are programs its
+  author chose. An applied build, convert, template extract or index build
+  now refuses them until you trust that project on your machine:
+  `check_toolchain action=trust projectPath=<mod>` shows what it would allow,
+  and `mode=apply` records it. CI can set `MODWRIGHT_TRUST_ALL=1`.
+- **Writes stay where they belong.** A deploy, pack, zip or exec path in
+  `modwright.json` that is absolute or climbs out with `..` is refused at
+  plan time unless that entry sets `"allowOutsideRoot": true`. `rollback`
+  restores only under the project and the game's mod roots unless you pass
+  `allowOutsideRoots`.
+- **Fixes:**
+  - the server no longer crashes when a request arrives just as it
+    restarts;
+  - rollback no longer writes through a junction into your mod repo;
+  - external tools now time out instead of hanging;
+  - a backup records the hash of the copy it made;
+  - a corrupt pending bridge request no longer breaks every later one;
+  - restaging a bridge removes files the bridge no longer has;
+  - a junction to a missing folder is refused, and a correct one is left
+    alone;
+  - `convert` backs up into the project, where `rollback` finds it;
+  - a build step or `--variant` naming a variant nothing declares is
+    refused instead of silently skipped;
+  - one unreadable log no longer stops `triage_logs`;
+  - Cyberpunk 2077: the archive-order note, RED4ext 1.30.0's per-plugin
+    check, and a moved redscript wiki link are corrected.
+- **The README** says how far each game is tested, what a fact's status
+  means, and how ModWright treats your machine ("Security"), including the
+  in-game bridges' trust model.
+
 ## 0.1.1 (2026-10-04)
 
 - **This repository is ModWright's public home,** for bug reports, game and
