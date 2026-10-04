@@ -1,5 +1,13 @@
 # ModWright release notes
 
+## 0.1.1 (2026-10-04)
+
+- **This repository is ModWright's public home,** for bug reports, game and
+  feature requests, and questions in Discussions. npm's page now links to it
+  as the homepage and the place to report bugs.
+- **The README gains "Reporting a problem":** what to include so a report
+  can be acted on.
+
 ## 0.1.0 (2026-10-04)
 
 The first public release.
