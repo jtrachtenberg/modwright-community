@@ -1,5 +1,27 @@
 # ModWright release notes
 
+## 0.1.4 (2026-10-04)
+
+Cyberpunk 2077 test setup through the in-game bridge, and a clean way to take
+the bridge back out.
+
+- **Three new Cyberpunk 2077 probes** for setting up an in-game test, each
+  run live on game version 2.31 and confirmed by reading the result back:
+  - `cp2077.world.spawn` spawns an entity from a resource path at the
+    player's position. The entity arrives a moment after the call, so the
+    probe's own lookup normally comes back empty;
+  - `cp2077.player.teleport` moves the player to a position;
+  - `cp2077.player.level` sets the player's level.
+
+  They change the game, so they run only when a request grants the
+  `session` tier. Don't keep a save you have used them on.
+- **`bridge action=remove`** takes a deployed bridge back out of the game:
+  every folder your project's `withBridge` deploy targets installed, backed
+  up first. A dry run shows which. A deploy without `withBridge` does not
+  remove an installed bridge, and the bridge notes now say so.
+- **Knowledge:** CET's `exEntitySpawner` spawn and despawn, and the teleport
+  and `SetLevel` calls, now verified in game.
+
 ## 0.1.3 (2026-10-04)
 
 "Which mod is doing this?" Two new tools, and log attribution, for an install
