@@ -15,30 +15,46 @@ Baldur's Gate 3, Skyrim Special Edition, Elden Ring, Valheim, Subnautica 2,
 Stardew Valley and Nivalis Nights:
 - install and mod detection, and load orders;
 - log triage and compatibility checks;
+- finding which mod is doing something: who owns a file, which mods write
+  the same record, and what the frameworks' own logs say;
 - the game's own data and a sourced knowledge base;
 - scaffolding, validation, build and deploy;
 - an in-game bridge where the game supports one.
 
 ## Install
 
-Node.js 20 or newer. For Claude Code:
+Node.js 20 or newer. For Claude Code on macOS or Linux:
 
 ```bash
-claude mcp add modwright -- npx -y modwright
+claude mcp add modwright -- npx -y modwright@latest
 ```
 
-Any other MCP client:
+On Windows, MCP clients cannot start `npx` directly, so it goes through
+`cmd /c`:
+
+```bash
+claude mcp add modwright -- cmd /c npx -y modwright@latest
+```
+
+Any other MCP client takes the same command in its configuration. On
+Windows, use `"command": "cmd"` and put `"/c", "npx"` in front of the
+arguments.
 
 ```json
 {
   "mcpServers": {
-    "modwright": { "command": "npx", "args": ["-y", "modwright"] }
+    "modwright": { "command": "npx", "args": ["-y", "modwright@latest"] }
   }
 }
 ```
 
-Then ask your assistant to run `list_games`, and `check_toolchain` for your
-game.
+- **Check it worked:** `npx -y modwright@latest --version` prints the
+  version. Then ask your assistant to run `list_games`, and
+  `check_toolchain` for your game.
+- **Updates:** `@latest` makes npx look for a new release each time your
+  client starts the server. Without it npx keeps the copy it cached the
+  first time. To stay on one version, name it instead, for example
+  `modwright@0.1.5`.
 
 ## Reporting a problem
 
@@ -51,6 +67,9 @@ report actionable:
 
 ModWright never needs your save files or your mod's private sources to
 diagnose a problem. Paste only what you are comfortable making public.
+
+A security problem goes to **Report a vulnerability** on this repository's
+[Security tab](../../security), not to a public issue.
 
 Questions and ideas that aren't a bug go to
 [Discussions](../../discussions).
