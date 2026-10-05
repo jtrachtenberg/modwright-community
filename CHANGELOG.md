@@ -1,5 +1,34 @@
 # ModWright release notes
 
+## 0.1.5 (2026-10-04)
+
+Safer writes, tidier backups, and a warning for a quiet way Cyberpunk mods lose
+edits.
+
+- **`who_touches` reports repeated keys.** Some installed Cyberpunk 2077 tweak
+  files repeat a key within one block. That's invalid YAML, which TweakXL
+  reads without an error, and which copy takes effect is not established, so
+  one of the edits may be silently lost. `who_touches` now lists each
+  repeated key with its file and lines, under `repeatedKeys`.
+- **Backups:**
+  - `rollback action=prune` keeps the newest 20 backup runs plus anything
+    under 14 days old. A dry run comes first, and only ModWright's own dated
+    folders are ever removed.
+  - `deploy` warns when a project passes 20 runs.
+  - Builds keep only their newest three stage folders.
+- **Deploy won't write through a folder link** someone made inside a game's
+  mod folder, which could otherwise send files somewhere else entirely, such
+  as a repository. Links your project declares as junctions are still
+  allowed.
+- **Clearer errors:** every tool's error now starts with the tool's name. The
+  server reports its real version to your MCP client.
+- **Fixes and knowledge:**
+  - shutting down no longer leaves a background server running;
+  - every validator now cites its evidence as a fact, a link or a dated
+    observation;
+  - a wiki claim that a repeated key breaks a whole TweakXL file is marked
+    contradicted: TweakXL 1.11.4 reads such files without an error.
+
 ## 0.1.4 (2026-10-04)
 
 Cyberpunk 2077 test setup through the in-game bridge, and a clean way to take
