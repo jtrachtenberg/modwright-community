@@ -1,5 +1,35 @@
 # ModWright release notes
 
+## 0.1.7 (2026-10-05)
+
+The in-game bridges' Lua eval becomes an opt-in, and a rollback now undoes a
+whole deploy.
+
+- **Lua eval is off unless a project opts in.** The bridges' `bg3.lua.eval`
+  and `cp2077.lua.eval` probes run whatever Lua a request carries, so they
+  now work only for a project whose `modwright.json` sets
+  `"bridge": { "policy": { "mode": "workbench" } }`. Stage the bridge again
+  after adding it (`bridge action=stage`), then deploy with `withBridge`.
+  Without it, every refusal says what eval allows and how to turn it on.
+  Every other probe works as before. The README's Security section also
+  explains what package scanners such as Socket report about ModWright, and
+  why.
+- **Rollback removes what a deploy added**, not only what it replaced. A
+  file you changed since the deploy is left in place and reported.
+- **`triage_logs` reads each RED4ext plugin's own log** in Cyberpunk 2077's
+  `red4ext/logs/`, one source per plugin, and reports their warnings and
+  errors.
+- **`check_compat` finds redscript's version** in Vortex's deployment record
+  when the compiler itself carries none.
+- **Two new checks in `validate`:**
+  - a Mod Settings option whose value saved on your machine differs from
+    the mod's default, so what you test there is not what a fresh install
+    ships;
+  - a quickhack program that keeps a vanilla `shardType`, which cannot be
+    slotted beside that vanilla quickhack.
+- **Fixes:** re-staging a bridge keeps its settings; a check of a missing
+  `.archive` no longer leaves a file open.
+
 ## 0.1.6 (2026-10-04)
 
 Published Baldur's Gate 3 mods, the Cyberpunk 2077 load order, and fewer
