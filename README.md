@@ -56,6 +56,20 @@ arguments.
   first time. To stay on one version, name it instead, for example
   `modwright@0.1.5`.
 
+**Or install it once.** A global install puts a `modwright` command on your
+PATH, and the client starts that instead of going through npx:
+
+```bash
+npm install -g modwright
+claude mcp add modwright -- modwright
+```
+
+On Windows, register it as `claude mcp add modwright -- cmd /c modwright`.
+In another client's configuration, use `"command": "modwright"` with no
+arguments (on Windows, `"command": "cmd"` with `"args": ["/c", "modwright"]`).
+It starts without a registry check and works offline. It updates only when
+you run `npm update -g modwright`.
+
 ## Reporting a problem
 
 [Open an issue](../../issues/new/choose). The template asks for what makes a
