@@ -1,5 +1,50 @@
 # ModWright release notes
 
+## 0.1.6 (2026-10-04)
+
+Published Baldur's Gate 3 mods, the Cyberpunk 2077 load order, and fewer
+needless redeploys.
+
+- **A Baldur's Gate 3 mod you have published on mod.io:**
+  - `project_info` reports its release state: which copies are installed
+    (your local build, the mod.io copy, a retired `.pak.bak`, a loose copy the
+    BG3 Toolkit left in `Data`) and which one `modsettings.lsx` binds. It
+    names the state as pre-release, update in progress or released, or says
+    plainly what doesn't match.
+  - With a `modio` publish target, deploying an update sets the live mod.io
+    copy aside as `.pak.bak` (backed up) instead of refusing. It does this only
+    after your new pak has landed.
+  - `deploy action=restore-published` goes back once the update is out. It
+    retires your local pak and the Toolkit's loose copy (kept in ModWright's
+    data folder, and `rollback` can undo it) and puts the mod.io copy back.
+  - `validate` no longer blocks a released mod whose only installed copy is
+    the mod.io one.
+- **`load_order` for Cyberpunk 2077:** archives in ASCII order, or in
+  `modlist.txt`'s order when that file exists, then REDmods. Each entry says
+  why it sits where it does. ModWright never writes `modlist.txt`.
+- **`load_order` for Baldur's Gate 3** checks that every mod's declared
+  dependencies are in the list and load before it.
+- **No more needless redeploys:** a Cyberpunk `.archive` that WolvenKit only
+  repacked, with the same content, is not copied and backed up again.
+- **Builds:**
+  - The validators that gate a build now check your sources too, such as tweak
+    files deployed straight from the project, not only the staged tree. A dry
+    run says up front when the build would stop.
+  - An exec step can set `"freshOutputs": true` to fail when the command exits
+    without rewriting its outputs, which WolvenKit's `convert deserialize` does
+    on a bad input. The Cyberpunk scaffolds' deserialize steps set it.
+  - `build variant=withBridge` works: it builds the normal build.
+- **Fixes and knowledge:**
+  - `$type: VehicleGear` and other types the game writes only as untyped
+    entries are no longer flagged as unknown.
+  - A repeated `HandleId` in a CR2W json is still blocked, and the message now
+    says what really happens: WolvenKit keeps only the last object, so the
+    others vanish from the built file without an error.
+  - TweakXL applies every copy of a repeated key, in file order. The
+    `repeatedKeys` note and the knowledge base now say so.
+  - `bridge status` and `deploy` say when a project's staged bridge is older
+    than the one ModWright ships.
+
 ## 0.1.5 (2026-10-04)
 
 Safer writes, tidier backups, and a warning for a quiet way Cyberpunk mods lose
