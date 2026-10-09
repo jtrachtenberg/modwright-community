@@ -1,5 +1,51 @@
 # ModWright release notes
 
+## 0.1.8 (2026-10-09)
+
+A much smaller install, a window inside Cyberpunk 2077 you can type to
+Claude Code from, and conflict reports for packed archives.
+
+- **Six packages instead of 96.** ModWright now uses the MCP SDK's v2 server
+  package and Zod 4. Express, hono, jose, cors, ajv and the rest of the old
+  SDK's tree are gone; the install is the SDK's server and core packages,
+  zod, yaml, smol-toml and sql.js. Clients see the same tools and the same
+  handshake. Two visible differences: an invalid tool argument comes back as
+  a tool error rather than a protocol error, and validation messages use
+  Zod 4's wording.
+- **An in-game window (Cyberpunk 2077).** The CET bridge draws a small
+  ModWright panel over the game, visible with the overlay closed. `bridge
+  say` puts a prompt in it, with up to four choices and an optional hold
+  countdown, and `bridge listen` waits for the player's answer. The answers
+  come from the GO, ABORT and Choice 1-4 hotkeys, which ship unbound: bind
+  them in the CET overlay's Bindings tab.
+- **Type to Claude Code from inside the game.** `npx modwright channel init
+  --project <your mod>` pairs a project, and `modwright channel` is a
+  Claude Code channel server (a Claude Code research preview). A note typed
+  in the window arrives in that session as your message, and the reply
+  shows in the game. Only events carrying the pairing key get through. The
+  README's "In-game chat" section has the steps.
+- **`find_conflicts` looks inside packed archives:**
+  - **Cyberpunk 2077:** it reads each `.archive`'s index and lists the
+    resources two or more archives carry. Each one comes with the winner
+    (the first loaded) and whether the copies are identical.
+  - **Baldur's Gate 3:** it lists the paths two loaded paks both supply, in
+    load order. No winner is named, because no sourced rule says which pak
+    wins.
+- **A deploy `into` ending in "/"** places a file inside that folder under
+  its own name, the natural way to put a RED4ext plugin at
+  `red4ext/plugins/<Name>/<Name>.dll`.
+- **A RED4ext plugin scaffold.** `new-red4ext-plugin` writes a minimal
+  plugin: an MSVC build script, the three exports, and a native game system
+  with its redscript declaration. It also registers the build step and the
+  deploy targets. Authoring sequences can now offer optional steps, and the
+  quickhack sequence offers this one.
+- **Smaller changes:**
+  - `bridge arm` uses the project's own bridge policy when no grant is
+    named;
+  - `load_order` marks a REDmod folder that holds only a mod manager's
+    markers;
+  - backups hash each file while copying it.
+
 ## 0.1.7 (2026-10-05)
 
 The in-game bridges' Lua eval becomes an opt-in, and a rollback now undoes a
