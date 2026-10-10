@@ -1,5 +1,33 @@
 # ModWright release notes
 
+## 0.1.9 (2026-10-10)
+
+Fixes from the field, and a tighter bridge.
+
+- **The bridges' Lua eval checks every gate in one place.** Each bridge's
+  eval handler now confirms, before any Lua compiles, that the project
+  opted in and that the request was granted the session tier. The bridge's
+  dispatcher still checks too, so this is a second layer, with no change in
+  behaviour.
+- **A bridge deploy keeps the bridge's own files.** A `withBridge` deploy
+  no longer deletes the files a running bridge writes: its heartbeat,
+  results, events, log, and CET's per-mod database. While the game is
+  running it still copies changed bridge files but does not prune that
+  folder, and says so.
+- **The in-game window lets go of old prompts.** A prompt that had already
+  expired before the game started is no longer drawn. A prompt that expires
+  on screen goes idle a minute later. `bridge action=say clear=true` (and
+  `reply` with `clear: true` in a chat session) clears the window at once.
+- **Re-running a scaffold updates your `modwright.json` in place.** A build
+  step with the same id is updated where it is instead of being added a
+  second time. Deploy targets, sources and dependencies merge the same way,
+  and a re-run that changes nothing leaves the file untouched. The report
+  says what was added, updated or unchanged.
+- **A steadier trust check.** Trusted projects are matched by their real
+  folder, so a path through a junction, a short name or another spelling
+  still matches. When a project is refused, the message names the trust
+  file it read and the folder it looked up.
+
 ## 0.1.8 (2026-10-09)
 
 A much smaller install, a window inside Cyberpunk 2077 you can type to
