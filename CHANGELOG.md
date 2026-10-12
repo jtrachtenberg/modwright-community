@@ -1,5 +1,42 @@
 # ModWright release notes
 
+## 0.1.10 (2026-10-11)
+
+An in-game window for Baldur's Gate 3, in-game test steps that wait for you,
+and fixes found in the field.
+
+- **An in-game window in Baldur's Gate 3.** The Script Extender bridge now
+  draws the same small ModWright window the Cyberpunk 2077 bridge has. It
+  shows a prompt, a hold countdown and up to four choices, and has GO, ABORT
+  and choice buttons and a note box, all used with a click. The keys are
+  Ctrl+Shift+G (GO), Ctrl+Shift+X (ABORT) and Ctrl+Shift+1 to 4, and the
+  game does not see them. It stays up in dialogue, in combat and with the
+  game's UI hidden. The BG3 bridge now needs Script Extender v25 or later.
+- **Test steps that wait for you.** A row in a test plan can carry a `hold`.
+  `run_tests` shows its prompt in the in-game window ("stand by the cart,
+  then GO") and takes that row's reads only after you press GO and a short
+  settle time passes. ABORT, or no GO, stops the remaining held rows. Your
+  assistant asks you to approve a held batch in chat before it runs one.
+- **`run_tests` leaves your plan file as you wrote it.** It writes back only
+  `observed`, `status` and `evidence`; it no longer adds default fields to
+  every row.
+- **Cyberpunk 2077 script reloads say whether they worked.** `deploy
+  reload=apply` already triggered Red Hot Tools' script reload. It now
+  reads Red Hot Tools' log afterwards and reports `confirmed` when the
+  reload completed, or `error`, meaning the edit is not live, when the
+  scripts failed to compile.
+- **The Baldur's Gate 3 bridge cleans up after itself.** A `withBridge`
+  deploy now removes a bridge file that a newer bridge no longer has. Before,
+  the cleanup rule never matched the bridge's folder. If your
+  `modwright.json` still carries the old rule, deploy says what to change.
+- **`bridge stage` prints the Baldur's Gate 3 mod-list entry.** It shows the
+  bridge's `ModuleShortDesc` and says whether your `modsettings.lsx` already
+  lists it, since a normal pak deploy does not report it.
+- **Clearer deploy reports.** A redeploy that only removes leftovers says
+  so, and recommends a reload. `restore-published` reports the state after
+  it ran, not before. The warning about a running game's bridge folder
+  names the right bridge for Cyberpunk 2077 projects.
+
 ## 0.1.9 (2026-10-10)
 
 Fixes from the field, and a tighter bridge.

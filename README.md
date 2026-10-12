@@ -19,7 +19,9 @@ Stardew Valley and Nivalis Nights:
   the same record, and what the frameworks' own logs say;
 - the game's own data and a sourced knowledge base;
 - scaffolding, validation, build and deploy;
-- an in-game bridge where the game supports one.
+- an in-game bridge where the game supports one, with a small window over
+  Cyberpunk 2077 and Baldur's Gate 3 where you answer your assistant's
+  prompts and in-game test steps.
 
 ## Install
 
